@@ -82,12 +82,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dev.pm.dyn_samplingrate=1 \
     ro.opengles.version=196610 \
     ro.hardware.egl=adreno \
-    ro.hardware.vulkan=msm8953 \
+    ro.hardware.vulkan=adreno \
     vendor.display.disable_scaler=1
 
 # Factory reset partition
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.frp.pst=/dev/block/platform/soc/7824900.sdhci/by-name/frp
+    ro.frp.pst=/dev/block/bootdevice/by-name/config
 
 # FM
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -171,6 +171,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=false \
     ro.telephony.default_network=10,10 \
     ro.vendor.telephony.default_network=10,10 \
+	rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
+	vendor.rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
     ro.vendor.use_data_netmgrd=true \
     ro.telephony.iwlan_operation_mode=legacy \
     persist.vendor.ims.dropset_feature=0 \

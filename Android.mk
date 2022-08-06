@@ -25,7 +25,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter river ocean channel, $(TARGET_DEVICE)),)
+ifneq ($(filter V430A V420A, $(TARGET_DEVICE)),)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
@@ -124,19 +124,5 @@ $(EGL_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf egl/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(EGL_SYMLINK)
-
-WIFI_SYMLINKS := $(TARGET_OUT_VENDOR)/firmware/wlan/prima/
-$(WIFI_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "Creating WCNSS Symlinks: $@"
-	@rm -rf $@/*
-	@mkdir -p $(dir $@)
-	$(hide) ln -sf /vendor/etc/wifi/WCNSS_qcom_wlan_nv.bin $(dir $@)
-	$(hide) ln -sf /vendor/etc/wifi/WCNSS_qcom_wlan_nv_Argentina.bin $(dir $@)
-	$(hide) ln -sf /vendor/etc/wifi/WCNSS_qcom_wlan_nv_Brazil.bin $(dir $@)
-	$(hide) ln -sf /vendor/etc/wifi/WCNSS_qcom_wlan_nv_India.bin $(dir $@)
-	$(hide) ln -sf /vendor/etc/wifi/WCNSS_qcom_wlan_nv_epa.bin $(dir $@)
-	$(hide) ln -sf /vendor/etc/wifi/WCNSS_wlan_dictionary.dat $(dir $@)
-
-ALL_DEFAULT_INSTALLED_MODULES += $(WIFI_SYMLINKS)
 
 endif

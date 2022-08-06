@@ -22,7 +22,7 @@
 # definition file).
 #
 
-$(call inherit-product, vendor/motorola/sdm632-common/sdm632-common-vendor.mk)
+$(call inherit-product, vendor/vsmart/sdm632-common/sdm632-common-vendor.mk)
 
 # Installs gsi keys into ramdisk, to boot a GSI with verified boot.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
@@ -232,7 +232,6 @@ PRODUCT_PACKAGES += \
     init.mmi.rc \
     init.qcom.rc \
     init.target.rc \
-    fstab.qcom \
     ueventd.qcom.rc
 
 # IPACM
@@ -271,10 +270,6 @@ PRODUCT_COPY_FILES += \
 # Media / StagefrightCodec 2.0
 PRODUCT_PACKAGES += \
     libstagefright_ccodec
-
-# MotoActions
-PRODUCT_PACKAGES += \
-    MotoActions
 
 # Network
 PRODUCT_PACKAGES += \
@@ -455,12 +450,6 @@ PRODUCT_PACKAGES += \
     libstdc++.vendor \
     libgui_vendor:32 \
     vndk_package
-
-# Wifi
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
-    $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_cfg.ini
 
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \

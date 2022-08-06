@@ -22,7 +22,7 @@
 # definition file).
 #
 
-PLATFORM_PATH := device/motorola/sdm632-common
+PLATFORM_PATH := device/vsmart/sdm632-common
 
 TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
 
@@ -149,17 +149,15 @@ TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_sdm632
 TARGET_RECOVERY_DEVICE_MODULES := libinit_sdm632
 
 # Kernel
-BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom ehci-hcd.park=3 lpm_levels.sleep_disabled=1
-BOARD_KERNEL_CMDLINE += androidboot.bootdevice=7824900.sdhci androidboot.usbconfigfs=true
-BOARD_KERNEL_CMDLINE += loop.max_part=7
-BOARD_KERNEL_CMDLINE += androidboot.veritymode=eio
+BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom msm_rtb.filter=0x237 lpm_levels.sleep_disabled=1
+BOARD_KERNEL_CMDLINE += ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000
 #BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-BOARD_KERNEL_SEPARATED_DTBO := true
-BOARD_INCLUDE_RECOVERY_DTBO := true
+#BOARD_KERNEL_SEPARATED_DTBO := true
+#BOARD_INCLUDE_RECOVERY_DTBO := true
 TARGET_KERNEL_SOURCE := kernel/motorola/sdm632
 TARGET_KERNEL_VERSION := 4.9
 TARGET_KERNEL_ARCH := arm64
@@ -169,24 +167,13 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 BOARD_BOOT_HEADER_VERSION := 1
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
-# Kernel additional flags
-TARGET_KERNEL_ADDITIONAL_FLAGS := \
-    HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
-
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
-# NFC / ODM
-ODM_MANIFEST_SKUS := nfc
-ODM_MANIFEST_NFC_FILES := $(PLATFORM_PATH)/odm_manifest_nfc.xml
-
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072                  # (BOARD_KERNEL_PAGESIZE * 64)
-BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-BOARD_USES_RECOVERY_AS_BOOT := true
-TARGET_NO_RECOVERY := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_COPY_OUT_VENDOR := vendor
@@ -199,9 +186,6 @@ TARGET_USES_INTERACTION_BOOST := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 ENABLE_VENDOR_RIL_SERVICE := true
 CUSTOM_APNS_FILE := $(PLATFORM_PATH)/configs/sprint_apns.xml
-
-# Recovery
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
 
 # Root
 BOARD_ROOT_EXTRA_FOLDERS := persist
